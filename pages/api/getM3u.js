@@ -7,15 +7,12 @@ export default async function handler(req, res) {
         id: req.query.id,
         sName: req.query.sname,
         token: req.query.tkn,
-        ent: req.query.ent.split('_'),
-        tsActive: req.query.sid.split('_')[1] === "D" ? false : true
+        ent: ['1000000001', '1000000948', '1000002451', '1000000086', '1000000331', '1000000042'],
+        tsActive: true
     };
-    if (uData.tsActive) {
+    
         let m3uString = await generateM3u(uData);
         res.status(200).send(m3uString);
-    }
-    else
-        res.status(409).json({ error: "Tata Sky Deactivated" });
 }
 
 
@@ -31,7 +28,7 @@ const getAllChans = async () => {
     let err = null;
     let res = null;
 
-    await fetch("https://ts-api.videoready.tv/content-detail/pub/api/v1/channels?limit=599", requestOptions)
+    await fetch("https://ts-api.videoready.tv/content-detail/pub/api/v1/channels?limit=999", requestOptions)
         .then(response => response.text())
         .then(result => res = JSON.parse(result))
         .then(r => r)
